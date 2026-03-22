@@ -43,6 +43,7 @@ for name, entry in models_data["data"].items():
     filenames: dict[str, str] = {k: v[0] if isinstance(v, list) else v for k, v in entry["assetList"].items()}
     if entry["type"] == "Operator":
         source_directory = os.path.join("Ark-Models-main", "models", name)
+        print(os.path.join(source_directory, filenames['.skel']))
         with open(os.path.join(source_directory, filenames['.skel']), "rb") as f:
             skeleton_data = SkeletonBinary().read_skeleton_data(f.read())
         for a in skeleton_data.animations:
