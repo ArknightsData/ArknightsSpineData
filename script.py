@@ -14,7 +14,7 @@ import zipfile
 
 import requests
 from spine_asset.v38 import SkeletonBinary
-from spine_asset.v38 import SkeletonJSON
+from spine_asset.v38 import SkeletonJson
 
 
 branch = "cn"
@@ -50,7 +50,7 @@ for name, entry in models_data["data"].items():
                 skeleton_data = SkeletonBinary().read_skeleton_data(f.read())
             except:
                 try:
-                    skeleton_data = SkeletonJSON().read_skeleton_data(f.read())
+                    skeleton_data = SkeletonJson().read_skeleton_data(f.read())
                 except:
                     print("Could'nt parse skeleton data for " + file_path)
         for a in skeleton_data.animations:
