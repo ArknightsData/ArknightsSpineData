@@ -45,11 +45,12 @@ for name, entry in models_data["data"].items():
         source_directory = os.path.join("Ark-Models-main", "models", name)
         file_path = os.path.join(source_directory, filenames['.skel'])
         # yea idk why I had to add this line but it was broken with out it I know it looks dumb
+        
+        print(file_path)
+        print(file_path[-5:])
         if (file_path[-5:] != ".skel"):
             os.rename(file_path, file_path + ".skel")
             file_path = file_path + ".skel"
-        print(file_path)
-        print(file_path[-5:])
         with open(file_path, "rb") as f:
             skeleton_data = SkeletonBinary().read_skeleton_data(f.read())
         for a in skeleton_data.animations:
