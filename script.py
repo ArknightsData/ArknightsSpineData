@@ -49,7 +49,8 @@ for name, entry in models_data["data"].items():
         print(file_path)
         print(file_path[-5:])
         if (file_path[-5:] != ".skel"):
-            os.rename(file_path, file_path + ".skel")
+            if (os.path.exists(file_path)):
+                os.rename(file_path, file_path + ".skel")
             file_path = file_path + ".skel"
         with open(file_path, "rb") as f:
             skeleton_data = SkeletonBinary().read_skeleton_data(f.read())
