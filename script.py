@@ -46,6 +46,7 @@ for name, entry in models_data["data"].items():
         file_path = os.path.join(source_directory, filenames['.skel'])
         # yea idk why I had to add this line but it was broken with out it I know it looks dumb
         if (file_path[-5:] != ".skel"):
+            os.rename(file_path, file_path + ".skel")
             file_path = file_path + ".skel"
         with open(file_path, "rb") as f:
             skeleton_data = SkeletonBinary().read_skeleton_data(f.read())
