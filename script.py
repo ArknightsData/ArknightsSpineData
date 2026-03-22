@@ -14,6 +14,7 @@ import zipfile
 
 import requests
 from spine_asset.v38 import SkeletonBinary
+from spine_asset.v38 import SkeletonJSON
 
 
 branch = "cn"
@@ -43,17 +44,15 @@ for name, entry in models_data["data"].items():
     filenames: dict[str, str] = {k: v[0] if isinstance(v, list) else v for k, v in entry["assetList"].items()}
     if entry["type"] == "Operator":
         source_directory = os.path.join("Ark-Models-main", "models", name)
-        file_path = os.path.join(os.getcwd(),source_directory, filenames['.skel'])
-        # yea idk why I had to add this line but it was broken with out it I know it looks dumb
-        
-        print(file_path)
-        print(file_path[-5:])
-        if (file_path[-5:] != ".skel"):
-            if (os.path.exists(file_path)):
-                os.rename(file_path, file_path + ".skel")
-            file_path = file_path + ".skel"
+        file_path = os.path.join(os.getcwd(),source_directory, filenames['.skel'])        
         with open(file_path, "rb") as f:
-            skeleton_data = SkeletonBinary().read_skeleton_data(f.read())
+            try:
+                skeleton_data = SkeletonBinary().read_skeleton_data(f.read())
+            except:
+                try:
+                    skeleton_data = SkeletonJSON().read_skeleton_data(f.read())
+                except:
+                    print("Could'nt parse skeleton data for " + file_path)
         for a in skeleton_data.animations:
             output_directory = os.path.join("operator", a.name)
             os.makedirs(output_directory, exist_ok=True)
