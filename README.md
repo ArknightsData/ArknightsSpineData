@@ -1,9 +1,14 @@
 # ArknightsSpineData
 
 ## thanks to these repos
+
 https://github.com/ashleney/SpineExporter
+
 https://github.com/ArknightsAssets/ArknightsSpines
 
+
+## python packages used
+spine_asset
 
 ### Copyright:
 
