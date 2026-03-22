@@ -43,8 +43,11 @@ for name, entry in models_data["data"].items():
     filenames: dict[str, str] = {k: v[0] if isinstance(v, list) else v for k, v in entry["assetList"].items()}
     if entry["type"] == "Operator":
         source_directory = os.path.join("Ark-Models-main", "models", name)
-        print(os.path.join(source_directory, filenames['.skel']))
-        with open(os.path.join(source_directory, filenames['.skel']), "rb") as f:
+        file_path = os.path.join(source_directory, filenames['.skel'])
+        # yea idk why I had to add this line but it was broken with out it I know it looks dumb
+        if (file_path[-5:] != ".skel"):
+            file_path = file_path + ".skel"
+        with open(file_path, "rb") as f:
             skeleton_data = SkeletonBinary().read_skeleton_data(f.read())
         for a in skeleton_data.animations:
             output_directory = os.path.join("operator", a.name)
