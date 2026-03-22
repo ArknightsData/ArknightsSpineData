@@ -78,8 +78,15 @@ for name, entry in models_data["data"].items():
 
     elif entry["type"] == "DynIllust":
         source_directory = os.path.join("Ark-Models-main", "models_illust", name)
-        with open(os.path.join(source_directory, filenames['.skel']), "rb") as f:
-            skeleton_data = SkeletonBinary().read_skeleton_data(f.read())
+        file_path = os.path.join(os.getcwd(),source_directory, filenames['.skel'])        
+        with open(file_path, "rb") as f:
+            try:
+                skeleton_data = SkeletonBinary().read_skeleton_data(f.read())
+            except:
+                try:
+                    skeleton_data = SkeletonJson().read_skeleton_data(f.read())
+                except:
+                    print("Could'nt parse skeleton data for " + file_path)
         for a in skeleton_data.animations:
             output_directory = os.path.join("illust", a.name)
             os.makedirs(output_directory, exist_ok=True)
@@ -109,8 +116,15 @@ for name, entry in models_data["data"].items():
         
     elif entry["type"] == "Enemy":
         source_directory = os.path.join("Ark-Models-main", "models_enemies", name)
-        with open(os.path.join(source_directory, filenames['.skel']), "rb") as f:
-            skeleton_data = SkeletonBinary().read_skeleton_data(f.read())
+        file_path = os.path.join(os.getcwd(),source_directory, filenames['.skel'])        
+        with open(file_path, "rb") as f:
+            try:
+                skeleton_data = SkeletonBinary().read_skeleton_data(f.read())
+            except:
+                try:
+                    skeleton_data = SkeletonJson().read_skeleton_data(f.read())
+                except:
+                    print("Could'nt parse skeleton data for " + file_path)
         for a in skeleton_data.animations:
             output_directory = os.path.join("enemies", a.name)
             os.makedirs(output_directory, exist_ok=True)
