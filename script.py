@@ -43,7 +43,7 @@ for name, entry in models_data["data"].items():
     filenames: dict[str, str] = {k: v[0] if isinstance(v, list) else v for k, v in entry["assetList"].items()}
     if entry["type"] == "Operator":
         source_directory = os.path.join("Ark-Models-main", "models", name)
-        file_path = os.path.join(source_directory, filenames['.skel'])
+        file_path = os.path.join(os.getcwd(),source_directory, filenames['.skel'])
         # yea idk why I had to add this line but it was broken with out it I know it looks dumb
         
         print(file_path)
