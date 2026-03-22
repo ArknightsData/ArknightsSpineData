@@ -18,11 +18,11 @@ from spine_asset.v38 import SkeletonBinary
 
 branch = "cn"
 
-checkout the actual asset branch
+# checkout the actual asset branch
 subprocess.run(["git", "fetch", "--depth=1", "origin", f"{branch}:{branch}"], check=True)
 subprocess.run(["git", "checkout", branch], check=True)
 
-download resources
+# download resources
 for url, destination in (
     ("https://github.com/ashleney/SpineExporter/releases/download/0.0.3/SpineExporter.zip", "SpineExporter"),
     ("https://github.com/isHarryh/Ark-Models/archive/refs/heads/main.zip", "Ark-Models-main"),
