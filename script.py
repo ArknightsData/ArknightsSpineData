@@ -150,7 +150,7 @@ for name, entry in models_data["data"].items():
                     check=True,
                 )
     except:
-        print("Something broke with " + name + " " + entry)
+        print("Something broke with " + name)
 
 if (os.path.exists(os.path.join(os.getcwd(),"Ark-Models-main"))):
     shutil.rmtree(os.path.join(os.getcwd(),"Ark-Models-main"))
