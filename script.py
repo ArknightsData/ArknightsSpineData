@@ -23,6 +23,13 @@ branch = "cn"
 subprocess.run(["git", "fetch", "--depth=1", "origin", f"{branch}:{branch}"], check=True)
 subprocess.run(["git", "checkout", branch], check=True)
 
+jsonData = {
+    'enemies': [],
+    'illust': [],
+    'operator': []
+}
+
+
 # download resources
 for url, destination in (
     ("https://github.com/ashleney/SpineExporter/releases/download/0.0.3/SpineExporter.zip", "SpineExporter"),
@@ -58,6 +65,10 @@ for name, entry in models_data["data"].items():
                 output_directory = os.path.join("operator", a.name)
                 os.makedirs(output_directory, exist_ok=True)
                 output_path = os.path.join(output_directory, filenames[".atlas"].replace(".atlas", ".webm"))
+                if not (a.name in jsonData['operator']):
+                    jsonData['operator'].update({f"{a.name}": []})
+                else:
+                    jsonData['operator'][a.name].append(name)
                 if os.path.exists(output_path):
                     continue
                     
@@ -92,6 +103,10 @@ for name, entry in models_data["data"].items():
                 output_directory = os.path.join("illust", a.name)
                 os.makedirs(output_directory, exist_ok=True)
                 output_path = os.path.join(output_directory, filenames[".atlas"].replace(".atlas", ".webm"))
+                if not (a.name in jsonData['operator']):
+                    jsonData['operator'].update({f"{a.name}": []})
+                else:
+                    jsonData['operator'][a.name].append(name)
                 if os.path.exists(output_path):
                     continue
 
@@ -130,6 +145,10 @@ for name, entry in models_data["data"].items():
                 output_directory = os.path.join("enemies", a.name)
                 os.makedirs(output_directory, exist_ok=True)
                 output_path = os.path.join(output_directory, filenames[".atlas"].replace(".atlas", ".webm"))
+                if not (a.name in jsonData['operator']):
+                    jsonData['operator'].update({f"{a.name}": []})
+                else:
+                    jsonData['operator'][a.name].append(name)
                 if os.path.exists(output_path):
                     continue
 
@@ -158,14 +177,6 @@ if (os.path.exists(os.path.join(os.getcwd(),"Ark-Models-main"))):
 if (os.path.exists(os.path.join(os.getcwd(),"SpineExporter"))):
     shutil.rmtree(os.path.join(os.getcwd(),"SpineExporter"))
 
-toSearch = {
-    'enemies': [],
-    'illust': [],
-    'operator': []
-}
-
-for paths in toSearch:
-    toSearch[paths] = os.listdir(os.path.join(os.getcwd(), paths))
 
 json_str = json.dumps(toSearch, indent=4)
 with open("output.json", "w") as f:
