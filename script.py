@@ -178,13 +178,13 @@ if (os.path.exists(os.path.join(os.getcwd(),"SpineExporter"))):
     shutil.rmtree(os.path.join(os.getcwd(),"SpineExporter"))
 
 
-json_str = json.dumps(toSearch, indent=4)
+json_str = json.dumps(jsonData, indent=4)
 with open("output.json", "w") as f:
     f.write(json_str)
 
 
 
-subprocess.run(["git", "add", "build", "illust"], check=True)
+subprocess.run(["git", "add", "operator", "illust", "enemies", "output.json"], check=True)
 if not subprocess.check_output(["git", "diff", "--cached", "--name-only"]).strip():
     print("Nothing exported")
     exit(0)
