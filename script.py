@@ -24,9 +24,9 @@ subprocess.run(["git", "fetch", "--depth=1", "origin", f"{branch}:{branch}"], ch
 subprocess.run(["git", "checkout", branch], check=True)
 
 jsonData = {
-    'enemies': [],
-    'illust': [],
-    'operator': []
+    'enemies': {},
+    'illust': {},
+    'operator': {}
 }
 
 
@@ -103,10 +103,10 @@ for name, entry in models_data["data"].items():
                 output_directory = os.path.join("illust", a.name)
                 os.makedirs(output_directory, exist_ok=True)
                 output_path = os.path.join(output_directory, filenames[".atlas"].replace(".atlas", ".webm"))
-                if not (a.name in jsonData['operator']):
-                    jsonData['operator'].update({f"{a.name}": []})
+                if not (a.name in jsonData['illust']):
+                    jsonData['illust'].update({f"{a.name}": []})
                 else:
-                    jsonData['operator'][a.name].append(name)
+                    jsonData['illust'][a.name].append(name)
                 if os.path.exists(output_path):
                     continue
 
@@ -145,10 +145,10 @@ for name, entry in models_data["data"].items():
                 output_directory = os.path.join("enemies", a.name)
                 os.makedirs(output_directory, exist_ok=True)
                 output_path = os.path.join(output_directory, filenames[".atlas"].replace(".atlas", ".webm"))
-                if not (a.name in jsonData['operator']):
-                    jsonData['operator'].update({f"{a.name}": []})
+                if not (a.name in jsonData['enemies']):
+                    jsonData['enemies'].update({f"{a.name}": []})
                 else:
-                    jsonData['operator'][a.name].append(name)
+                    jsonData['enemies'][a.name].append(name)
                 if os.path.exists(output_path):
                     continue
 
